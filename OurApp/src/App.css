@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  background-color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Ensures that absolutely positioned children are relative to this container */
+}
+
+.App-header {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.App-logo {
+  position: absolute; /* Absolute position within the header */
+  right: 0; /* Align to the right of the header */
+  height: 180px; /* Set the size of your logo */
+  width: auto; /* Maintain aspect ratio */
+  padding-right: 50px; /* Add right padding here */
+  /* Additional styles if needed */
+}
+
+.App-body {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 450px; /* Adjust this width for the search bar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  width: 100%; /* This will make the input group fill the .App-body */
+}
+
+.response-message {
+  position: absolute;
+  top: 90%; /* Adjust if necessary */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 450px; /* Should match the width of .App-body to keep alignment */
+}
+
+
+.traffic-image {
+  position: absolute;
+  top: 100%; /* Adjust if necessary */
+  max-width: 100%; /* Make sure the image is responsive and doesn't overflow */
+  height: auto; /* Maintain the aspect ratio */
+  padding-top: 30px; /* Add right padding here */
+}
