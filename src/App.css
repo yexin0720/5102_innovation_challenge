@@ -10,7 +10,7 @@
 
 .App-header {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -26,10 +26,10 @@
 
 .App-body {
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 150%;
   max-width: 450px; /* Adjust this width for the search bar */
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   top: 90%; /* Adjust if necessary */
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 150%;
   display: flex;
   justify-content: center;
   max-width: 450px; /* Should match the width of .App-body to keep alignment */
@@ -57,5 +57,5 @@
   top: 100%; /* Adjust if necessary */
   max-width: 100%; /* Make sure the image is responsive and doesn't overflow */
   height: auto; /* Maintain the aspect ratio */
-  padding-top: 30px; /* Add right padding here */
+  padding-top: 200px; /* Add right padding here */
 }

@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { Search } from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import logo from './NCS Logo.jpeg'; 
+import logo from './NCS Logo.jpeg';
 
 function App() {
   const [response, setResponse] = useState({ message: '', imageUrl: '' });
+  const [displayedMessage, setDisplayedMessage] = useState('');
   const [userInput, setUserInput] = useState('');
+
+  useEffect(() => {
+    const animateMessage = (index = 0) => {
+      if (index < response.message.length) {
+        setDisplayedMessage((prev) => prev + response.message.charAt(index));
+        setTimeout(() => animateMessage(index + 1), 50); // Adjust the speed as needed
+      }
+    };
+
+    if (response.message) {
+      setDisplayedMessage(''); // Reset displayed message before starting
+      animateMessage(); // Start animating
+    }
+  }, [response.message]); // This effect depends on the response.message
 
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
   };
 
   const handleSubmit = () => {
-    // Send the user input to the backend via POST method
     fetch('/receive', {
       method: 'POST',
       headers: {
@@ -47,10 +61,9 @@ function App() {
             <Search />
           </Button>
         </InputGroup>
-        {response.message && <div className="response-message">The traffic condition is {response.message}</div>}
+        {displayedMessage && <div className="response-message">{displayedMessage}</div>}
         {response.imageUrl && <img src={response.imageUrl} alt="Traffic" className="traffic-image" />}
-        </div>
-
+      </div>
     </div>
   );
 }
