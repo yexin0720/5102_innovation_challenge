@@ -38,9 +38,14 @@ function App() {
       body: JSON.stringify({ text: userInput }),
     })
     .then(response => response.json())
-    .then(data => setResponse({ message: data.message, imageUrl: data.imageUrl }))
+    .then(data => {
+      const timestamp = new Date().getTime();
+      const uncachedImageUrl = data.imageUrl + `?t=${timestamp}`;
+      setResponse({ message: data.message, imageUrl: uncachedImageUrl });
+    })
     .catch(error => console.error('Error:', error));
   };
+
 
   return (
     <div className="App">
