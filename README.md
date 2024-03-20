@@ -36,7 +36,12 @@ Requirement: Please have npm and yarn installed.
 5. `npm install`
 6. `npm run start`
 The front end will be running on http://localhost:3000/
+
 or
-1. `cd OurApp`
-2. `yarn start`
-3. The app will be running on http://localhost:3000/
+
+1. open another separate terminal window
+2. `conda activate venv`
+3. `cd OurApp`
+4. `yarn install`
+5. `yarn start`
+6. The app will be running on http://localhost:3000/
