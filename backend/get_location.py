@@ -2,7 +2,7 @@ from transformers import DistilBertTokenizer, DistilBertForTokenClassification
 from transformers import pipeline
 
 # Load pre-trained model and tokenizer
-def get_location_LLM():
+def get_location_LLM(text):
     model_name = "elastic/distilbert-base-cased-finetuned-conll03-english"
     # model_name = "dbmdz/bert-base-turkish-cased"
     tokenizer = DistilBertTokenizer.from_pretrained(model_name)
@@ -12,7 +12,7 @@ def get_location_LLM():
     ner_pipeline = pipeline("ner", model=model, tokenizer=tokenizer)
 
     # Example text
-    text = "what is the current flow in Tuas Checkpoint?"
+    # text = "what is the current flow in Tuas Checkpoint?"
 
     # Use the pipeline to predict entities
     entities = ner_pipeline(text)
