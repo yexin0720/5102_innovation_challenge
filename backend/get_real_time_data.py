@@ -64,6 +64,7 @@ def location_split(list):
 
 def get_best_match(camera_data, latitude, longitude):
     best_match = None
+    camera_data = pd.DataFrame(camera_data['value'])
     for i in range(len(camera_data)):
         lat, lng = camera_data['Latitude'][i], camera_data['Longitude'][i]
         distance = get_distance(lat, latitude, lng, longitude)

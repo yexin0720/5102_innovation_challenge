@@ -39,10 +39,15 @@ def get_imgae_from_link(camera_link):
     response = requests.get(camera_link)
     if response.status_code == 200:
         image_bytes = BytesIO(response.content)
-        
-        # use Pillow open image
+
         image = Image.open(image_bytes)
-        image.show()
+        response = requests.get(camera_link)
+        if response.status_code == 200:
+            with open("./static/Traffic_image.png", "wb") as file:
+                file.write(response.content)
+            print("File downloaded successfully.")
+        else:
+            print("Failed to download the file.")
     else:
         print("Failed to get image! Please try again!")
     return image

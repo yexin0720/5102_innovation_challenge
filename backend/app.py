@@ -14,8 +14,8 @@ def receive():
     latitude, longitude = get_location_coordinate(location)
     camera_data = get_data()
     traffic_data = get_best_match(camera_data, latitude, longitude)
-    image_link = get_image(traffic_data)
-    image = get_imgae_from_link(image_link)
+    # print(traffic_data)
+    image = get_imgae_from_link(traffic_data)
     traffic_prediction = predict_image(image, classes=['Empty', 'High', 'Low', 'Medium', 'Traffic Jam'])
     result = sarcastic_comment(traffic_prediction) # replace with result string from api
     # call api function here
