@@ -11,7 +11,9 @@ def receive():
     image_url = url_for('static', filename='Traffic_image.png') # replace filename with the image from api
     try:
         data = request.get_json()
-        received_text = data.get('text', '') # input for api
+        print(data)
+        received_text = data.get("text", '') # input for api
+        print(received_text)
         location = get_location_LLM(received_text)
         latitude, longitude = get_location_coordinate(location)
         camera_data = get_data()
