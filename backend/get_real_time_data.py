@@ -26,7 +26,8 @@ def get_data(api_key='YfWoD5wkQ2SvYbRnNyxLQw=='):
 # Use google map API to get the real location coordinates based on address
 def get_location_coordinate(address):
     api_key = "AIzaSyA4XlLwJ8VsbrmA-F67RoN91VRDk8K0ZS0"
-    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    # api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&components=country:SG&key={1}'.format(address, api_key))
     api_response_dict = api_response.json()
 
     if api_response_dict['status'] == 'OK':
