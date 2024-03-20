@@ -3,6 +3,7 @@ from transformers import pipeline
 
 # Load pre-trained model and tokenizer
 def get_location_LLM(text):
+    print(text)
     model_name = "elastic/distilbert-base-cased-finetuned-conll03-english"
     # model_name = "dbmdz/bert-base-turkish-cased"
     tokenizer = DistilBertTokenizer.from_pretrained(model_name)
@@ -16,11 +17,14 @@ def get_location_LLM(text):
 
     # Use the pipeline to predict entities
     entities = ner_pipeline(text)
+    print(entities)
 
     # Extract and print locations
     locations = [entity['word'] for entity in entities if entity['entity'] == 'I-LOC' or entity['entity'] == 'B-LOC']
 
     res = []
+    print("--------------------")
+    print(locations)
     temp = locations[0]
     for i in range(1, len(locations)):
         if locations[i][0] == "#":
