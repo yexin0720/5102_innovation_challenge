@@ -28,16 +28,19 @@ function App() {
   const handleInputChange = (event) => {
     setUserInput(event.target.value);
   };
+  console.log(JSON.stringify({text: userInput}));
 
-  const handleSubmit = () => {
-    fetch('/receive', {
-      method: 'POST',
+  const handleSubmit = async() => {
+    fetch("/receive", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: userInput }),
     })
-    .then(response => response.json())
+    .then(response => {
+      response.json();
+    })
     .then(data => {
       const timestamp = new Date().getTime();
       const uncachedImageUrl = data.imageUrl + `?t=${timestamp}`;
