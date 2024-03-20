@@ -15,7 +15,7 @@ function App() {
     const animateMessage = (index = 0) => {
       if (index < response.message.length) {
         setDisplayedMessage((prev) => prev + response.message.charAt(index));
-        setTimeout(() => animateMessage(index + 1), 50); // Adjust the speed as needed
+        setTimeout(() => animateMessage(index + 1), 12); // Adjust the speed as needed
       }
     };
 
