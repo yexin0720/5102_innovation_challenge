@@ -1,8 +1,9 @@
 import requests
 import pandas as pd
 from fuzzywuzzy import process
+import requests
 
-def get_data(api_key):
+def get_data(api_key='YfWoD5wkQ2SvYbRnNyxLQw=='):
     # url = "http://datamall2.mytransport.sg/ltaodataservice/EstTravelTimes"
     # url = "http://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2"
     # url = "http://datamall2.mytransport.sg/ltaodataservice/TrafficFlow"
@@ -21,6 +22,21 @@ def get_data(api_key):
     else:
         print("Failed to retrieve data. Status code:", response.status_code)
         return None
+    
+# Use google map API to get the real location coordinates based on address
+def get_location_coordinate(address):
+    api_key = "AIzaSyA4XlLwJ8VsbrmA-F67RoN91VRDk8K0ZS0"
+    api_response = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}'.format(address, api_key))
+    api_response_dict = api_response.json()
+
+    if api_response_dict['status'] == 'OK':
+        latitude = api_response_dict['results'][0]['geometry']['location']['lat']
+        longitude = api_response_dict['results'][0]['geometry']['location']['lng']
+        return latitude, longitude
+
+
+def get_distance(x1, x2, y1, y2):
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
 
 # Use google map API to get the real location name based on lat&lng
@@ -46,6 +62,15 @@ def location_split(list):
         camera_location_split.append(i.split(',', 1)[0])
     return camera_location_split
 
+def get_best_match(camera_data, latitude, longitude):
+    best_match = None
+    for i in range(len(camera_data)):
+        lat, lng = camera_data['Latitude'][i], camera_data['Longitude'][i]
+        distance = get_distance(lat, latitude, lng, longitude)
+        if not best_match or distance < best_match[1]:
+            best_match = (i, distance)
+    return camera_data.iloc[best_match[0]]["ImageLink"]
+
 def get_real_time_data_final_process():
     LTA_api_key = "YfWoD5wkQ2SvYbRnNyxLQw=="
     camera_data = get_data(LTA_api_key)
@@ -67,3 +92,11 @@ def get_real_time_data_final_process():
                 print("Failed to retrieve location name.")
     camera_location_split = location_split(camera_location_list)
     return camera_data, camera_location_list, camera_location_split
+
+
+if __name__ == '__main__':
+    camera_data = get_data()
+    camera_data = pd.DataFrame(camera_data['value'])
+    best_match = get_best_match(camera_data, 1.29939, 103.7799)
+    print(best_match['ImageLink'])
+

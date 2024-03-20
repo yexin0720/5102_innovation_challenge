@@ -35,6 +35,18 @@ def get_image(camera_data, best_match_index):
     
     return image
 
+def get_imgae_from_link(camera_link):
+    response = requests.get(camera_link)
+    if response.status_code == 200:
+        image_bytes = BytesIO(response.content)
+        
+        # use Pillow open image
+        image = Image.open(image_bytes)
+        image.show()
+    else:
+        print("Failed to get image! Please try again!")
+    return image
+
 def predict_image(image, classes):
     map_location=torch.device('cpu')
     finetuning_weights_path = "finetuning_model.pth"
