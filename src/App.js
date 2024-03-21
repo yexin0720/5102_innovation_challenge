@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to OurApp!</h1>
+        <h1>Welcome to Sardonic Road Radar!</h1>
       </header>
       <img src={logo} alt="Logo" className="App-logo" />
 
